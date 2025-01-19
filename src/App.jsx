@@ -5,20 +5,18 @@ import Contact from "./pages/ContactMe";
 import Experience from "./pages/Experience";
 
 function App() {
-  
-
   return (
     <Router>
       <NavBar />
-    <Routes>
-      <Route path="/" element={<h1>Inicio</h1>} />
-      <Route path="/about" element={<About />} />
-      <Route path="/experience" element={<Experience />} />
-      <Route path="/contact" element={<Contact />} />
-    </Routes>
+      <div className="pt-32">
+        <Routes>
+          <Route path="/" element={<About />} />
+          <Route path="/experience" element={<Experience />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </div>
     </Router>
-    
-  )
+  );
 }
 
-export default App
+export default App;
