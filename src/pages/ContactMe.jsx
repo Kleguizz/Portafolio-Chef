@@ -21,7 +21,7 @@ const ContactMe = () => {
             type="text"
             id="firstName"
             name="firstName"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#bdcdd0]"
             required
           />
         </div>
@@ -33,7 +33,7 @@ const ContactMe = () => {
             type="text"
             id="lastName"
             name="lastName"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#bdcdd0]"
             required
           />
         </div>
@@ -45,7 +45,7 @@ const ContactMe = () => {
             type="tel"
             id="phone"
             name="phone"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#bdcdd0]"
             required
           />
         </div>
@@ -57,7 +57,7 @@ const ContactMe = () => {
             type="email"
             id="email"
             name="email"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#bdcdd0]"
             required
           />
         </div>
@@ -70,7 +70,7 @@ const ContactMe = () => {
             name="message"
             ref={messageRef}
             rows="4"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#bdcdd0] resize-none"
             onInput={handleInput}
             required
           ></textarea>
@@ -78,7 +78,7 @@ const ContactMe = () => {
         <div className="text-center">
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+            className="bg-[#bdcdd0] text-white px-4 py-2 rounded-lg hover:bg-[#8ba6ac] transition duration-300"
           >
             Enviar
           </button>
