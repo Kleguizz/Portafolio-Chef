@@ -1,4 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faBriefcase, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar() {
   const location = useLocation();
@@ -11,30 +13,33 @@ function Navbar() {
           <li>
             <Link
               to="/"
-              className={`text-gray-800 no-underline py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 ${
+              className={`flex items-center text-gray-800 no-underline py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 ${
                 location.pathname === "/" ? "bg-[#8ba6ac] text-white" : "hover:bg-[#8ba6ac] hover:text-white"
               }`}
             >
+              <FontAwesomeIcon icon={faHome} className="mr-2" />
               Sobre Mí
             </Link>
           </li>
           <li>
             <Link
               to="/experience"
-              className={`text-gray-800 no-underline py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 ${
+              className={`flex items-center text-gray-800 no-underline py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 ${
                 location.pathname === "/experience" ? "bg-[#8ba6ac] text-white" : "hover:bg-[#8ba6ac] hover:text-white"
               }`}
             >
+              <FontAwesomeIcon icon={faBriefcase} className="mr-2" />
               Mi Experiencia
             </Link>
           </li>
           <li>
             <Link
               to="/contact"
-              className={`text-gray-800 no-underline py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 ${
+              className={`flex items-center text-gray-800 no-underline py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 ${
                 location.pathname === "/contact" ? "bg-[#8ba6ac] text-white" : "hover:bg-[#8ba6ac] hover:text-white"
               }`}
             >
+              <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
               Contáctame
             </Link>
           </li>
