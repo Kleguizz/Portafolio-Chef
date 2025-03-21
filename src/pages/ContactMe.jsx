@@ -225,9 +225,10 @@ const ContactMe = () => {
                     group relative inline-flex items-center justify-center px-8 py-3 rounded-xl
                     overflow-hidden font-medium transition-all duration-300
                     ${isSubmitting 
-                      ? 'bg-gray-400 cursor-not-allowed text-white/50' 
-                      : 'bg-gradient-to-r from-[#bdcdd0] to-[#8ba6ac] text-white hover:scale-105 active:scale-100'
+                      ? 'bg-blue-400 cursor-not-allowed text-white/50' 
+                      : 'bg-gradient-to-r from-[#4f9aff] to-[#2a7fbd] text-white hover:scale-105 active:scale-100'
                     }
+                    
                   `}
                 >
                   <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-white/20 group-hover:translate-x-full group-hover:skew-x-12"></span>
