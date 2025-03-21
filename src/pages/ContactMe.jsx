@@ -1,19 +1,18 @@
 import React, { useRef, useState } from 'react';
 import { toast, Toaster } from 'react-hot-toast';
-import backgroundImage from '../assets/laptop_code_programming_212332_5184x3456.jpg';
 
 const CustomToast = ({ message }) => (
   <div className="flex items-center space-x-4 bg-white rounded-lg shadow-xl p-4">
     <div className="flex-shrink-0">
-      <div className="h-12 w-12 bg-green-100 rounded-full flex items-center justify-center">
-        <svg className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="h-12 w-12 bg-violet-100 rounded-full flex items-center justify-center">
+        <svg className="h-6 w-6 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
         </svg>
       </div>
     </div>
     <div>
-      <h3 className="text-sm font-medium text-gray-900">¡Mensaje Enviado!</h3>
-      <p className="mt-1 text-sm text-gray-500">{message}</p>
+      <h3 className="text-sm font-medium text-gray-900 font-poppins">¡Mensaje Enviado!</h3>
+      <p className="mt-1 text-sm text-gray-500 font-poppins">{message}</p>
     </div>
   </div>
 );
@@ -50,13 +49,13 @@ const ContactMe = () => {
     const loadingToast = toast.loading(
       <div className="flex items-center space-x-3">
         <div className="animate-pulse">
-          <div className="h-10 w-10 bg-[#bdcdd0] rounded-full flex items-center justify-center">
+          <div className="h-10 w-10 bg-violet-500 rounded-full flex items-center justify-center">
             <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
             </svg>
           </div>
         </div>
-        <div>
+        <div className="font-poppins">
           <p className="text-sm font-medium text-gray-900">Enviando mensaje</p>
           <p className="text-sm text-gray-500">Por favor, espera un momento...</p>
         </div>
@@ -93,7 +92,7 @@ const ContactMe = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>
-          <div>
+          <div className="font-poppins">
             <p className="text-sm font-medium text-gray-900">Error al enviar</p>
             <p className="text-sm text-gray-500">Por favor, intenta nuevamente</p>
           </div>
@@ -107,25 +106,21 @@ const ContactMe = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center overflow-hidden" 
-         style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
       <Toaster position="bottom-center" reverseOrder={false} />
       
-      {/* Fondo con efecto de gradiente y blur */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-transparent backdrop-blur-sm z-0"></div>
-      
-      <div className="relative z-10 w-full max-w-4xl mx-auto p-8">
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/20">
+      <div className="w-full max-w-4xl mx-auto">
+        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-6 sm:p-8 border border-white/20">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-4xl font-bold text-white text-center mb-2">Contáctame</h2>
-            <p className="text-gray-300 text-center mb-8">Si te interesa colaborar conmigo, no dudes en contactarme.</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-2 font-poppins">Contáctame</h2>
+            <p className="text-gray-300 text-center mb-8 font-poppins text-sm sm:text-base">Si te interesa colaborar conmigo, no dudes en contactarme.</p>
             
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-2">
                   <label
                     htmlFor="firstName"
-                    className="block text-sm font-medium text-gray-300"
+                    className="block text-sm font-medium text-gray-300 font-poppins"
                   >
                     Nombre
                   </label>
@@ -135,7 +130,7 @@ const ContactMe = () => {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-white/10 border-2 border-white/20 rounded-xl text-white focus:outline-none focus:border-[#bdcdd0] focus:ring-2 focus:ring-[#bdcdd0]/50 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-white/10 border-2 border-violet-300/20 rounded-xl text-white focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/50 transition-all duration-300 font-poppins"
                     required
                   />
                 </div>
@@ -143,7 +138,7 @@ const ContactMe = () => {
                 <div className="space-y-2">
                   <label
                     htmlFor="lastName"
-                    className="block text-sm font-medium text-gray-300"
+                    className="block text-sm font-medium text-gray-300 font-poppins"
                   >
                     Apellido
                   </label>
@@ -153,7 +148,7 @@ const ContactMe = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-white/10 border-2 border-white/20 rounded-xl text-white focus:outline-none focus:border-[#bdcdd0] focus:ring-2 focus:ring-[#bdcdd0]/50 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-white/10 border-2 border-violet-300/20 rounded-xl text-white focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/50 transition-all duration-300 font-poppins"
                     required
                   />
                 </div>
@@ -162,7 +157,7 @@ const ContactMe = () => {
               <div className="space-y-2">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-300"
+                  className="block text-sm font-medium text-gray-300 font-poppins"
                 >
                   Email
                 </label>
@@ -172,7 +167,7 @@ const ContactMe = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white/10 border-2 border-white/20 rounded-xl text-white focus:outline-none focus:border-[#bdcdd0] focus:ring-2 focus:ring-[#bdcdd0]/50 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white/10 border-2 border-violet-300/20 rounded-xl text-white focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/50 transition-all duration-300 font-poppins"
                   required
                 />
               </div>
@@ -180,7 +175,7 @@ const ContactMe = () => {
               <div className="space-y-2">
                 <label
                   htmlFor="phone"
-                  className="block text-sm font-medium text-gray-300"
+                  className="block text-sm font-medium text-gray-300 font-poppins"
                 >
                   Número de Celular
                 </label>
@@ -190,7 +185,7 @@ const ContactMe = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white/10 border-2 border-white/20 rounded-xl text-white focus:outline-none focus:border-[#bdcdd0] focus:ring-2 focus:ring-[#bdcdd0]/50 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white/10 border-2 border-violet-300/20 rounded-xl text-white focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/50 transition-all duration-300 font-poppins"
                   required
                 />
               </div>
@@ -198,7 +193,7 @@ const ContactMe = () => {
               <div className="space-y-2">
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-gray-300"
+                  className="block text-sm font-medium text-gray-300 font-poppins"
                 >
                   Mensaje
                 </label>
@@ -212,23 +207,23 @@ const ContactMe = () => {
                     handleInput();
                   }}
                   rows="4"
-                  className="w-full px-4 py-3 bg-white/10 border-2 border-white/20 rounded-xl text-white focus:outline-none focus:border-[#bdcdd0] focus:ring-2 focus:ring-[#bdcdd0]/50 transition-all duration-300 resize-none"
+                  className="w-full px-4 py-3 bg-white/10 border-2 border-violet-300/20 rounded-xl text-white focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/50 transition-all duration-300 resize-none font-poppins"
                   required
                 ></textarea>
               </div>
 
-              <div className="text-center">
+              <div className="text-center pt-4">
                 <button
                   type="submit"
                   disabled={isSubmitting}
                   className={`
                     group relative inline-flex items-center justify-center px-8 py-3 rounded-xl
-                    overflow-hidden font-medium transition-all duration-300
+                    overflow-hidden font-medium transition-all duration-300 transform
                     ${isSubmitting 
-                      ? 'bg-blue-400 cursor-not-allowed text-white/50' 
-                      : 'bg-gradient-to-r from-[#4f9aff] to-[#2a7fbd] text-white hover:scale-105 active:scale-100'
+                      ? 'bg-gray-400 cursor-not-allowed text-white/50' 
+                      : 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:scale-105 active:scale-100 hover:shadow-lg'
                     }
-                    
+                    font-poppins text-sm sm:text-base
                   `}
                 >
                   <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-white/20 group-hover:translate-x-full group-hover:skew-x-12"></span>
