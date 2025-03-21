@@ -45,7 +45,7 @@ const ContactMe = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     const loadingToast = toast.loading(
       <div className="flex items-center space-x-3">
         <div className="animate-pulse">
@@ -61,7 +61,7 @@ const ContactMe = () => {
         </div>
       </div>
     );
-    
+
     try {
       const response = await fetch(import.meta.env.VITE_FORMSPREE_ENDPOINT, {
         method: 'POST',
@@ -108,13 +108,13 @@ const ContactMe = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
       <Toaster position="bottom-center" reverseOrder={false} />
-      
+
       <div className="w-full max-w-4xl mx-auto">
         <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-6 sm:p-8 border border-white/20">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-2 font-poppins">Contáctame</h2>
             <p className="text-gray-300 text-center mb-8 font-poppins text-sm sm:text-base">Si te interesa colaborar conmigo, no dudes en contactarme.</p>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-2">
@@ -184,11 +184,18 @@ const ContactMe = () => {
                   id="phone"
                   name="phone"
                   value={formData.phone}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    // Solo actualizar si es un número
+                    const value = e.target.value.replace(/[^0-9]/g, ''); // Elimina cualquier caracter no numérico
+                    handleChange({ target: { name: 'phone', value } }); // Actualiza el estado
+                  }}
+                  pattern="^[0-9]*$" // Asegura que solo se acepten números
                   className="w-full px-4 py-3 bg-white/10 border-2 border-violet-300/20 rounded-xl text-white focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/50 transition-all duration-300 font-poppins"
                   required
                 />
               </div>
+
+
 
               <div className="space-y-2">
                 <label
@@ -219,8 +226,8 @@ const ContactMe = () => {
                   className={`
                     group relative inline-flex items-center justify-center px-8 py-3 rounded-xl
                     overflow-hidden font-medium transition-all duration-300 transform
-                    ${isSubmitting 
-                      ? 'bg-gray-400 cursor-not-allowed text-white/50' 
+                    ${isSubmitting
+                      ? 'bg-gray-400 cursor-not-allowed text-white/50'
                       : 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:scale-105 active:scale-100 hover:shadow-lg'
                     }
                     font-poppins text-sm sm:text-base
