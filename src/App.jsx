@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/NavBar';
 import AboutMe from './pages/AboutMe';
 import Experience from './pages/Experience';
 import ContactMe from './pages/ContactMe';
@@ -7,11 +7,17 @@ import backgroundImage from './assets/laptop_code_programming_212332_5184x3456.j
 
 function App() {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen select-none">
       {/* Imagen de fondo fija */}
       <div 
         className="fixed inset-0 bg-cover bg-center bg-fixed z-0"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
+        style={{ 
+          backgroundImage: `url(${backgroundImage})`,
+          WebkitUserSelect: 'none',
+          MozUserSelect: 'none',
+          msUserSelect: 'none',
+          userSelect: 'none'
+        }}
       />
       
       {/* Gradiente de fondo fijo */}
