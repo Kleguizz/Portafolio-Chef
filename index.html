@@ -1,15 +1,42 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/chef-icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>Vite + React</title>
+    <meta name="description" content="Experiencia gastronómica única por Chef Profesional - Arte culinario contemporáneo" />
+    
+    <!-- Fuentes personalizadas -->
+    <link rel="stylesheet" href="https://use.typekit.net/xyz123.css"> <!-- Migra -->
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/monument-extended" />
+    <link rel="stylesheet" href="/fonts/ginger/stylesheet.css">
+    
+    <title>Chef Studio | Experiencia Gastronómica Contemporánea</title>
+    <style>
+      @keyframes grain {
+        0%, 100% { transform: translate(0, 0) }
+        10% { transform: translate(-5%, -10%) }
+        30% { transform: translate(3%, -15%) }
+        50% { transform: translate(-10%, 5%) }
+        70% { transform: translate(15%, 0%) }
+        90% { transform: translate(-5%, 10%) }
+      }
+      
+      .grain::before {
+        content: '';
+        position: fixed;
+        top: -150%;
+        left: -50%;
+        width: 300%;
+        height: 300%;
+        background-image: url('/grain.png');
+        opacity: 0.12;
+        animation: grain 8s steps(10) infinite;
+        pointer-events: none;
+      }
+    </style>
   </head>
-  <body>
+  <body class="bg-cream grain">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

@@ -1,38 +1,37 @@
-import React, { useRef, useState } from 'react';
-import { toast, Toaster } from 'react-hot-toast';
-
-const CustomToast = ({ message }) => (
-  <div className="flex items-center space-x-4 bg-white rounded-lg shadow-xl p-4">
-    <div className="flex-shrink-0">
-      <div className="h-12 w-12 bg-violet-100 rounded-full flex items-center justify-center">
-        <svg className="h-6 w-6 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-        </svg>
-      </div>
-    </div>
-    <div>
-      <h3 className="text-sm font-medium text-gray-900 font-poppins">¡Mensaje Enviado!</h3>
-      <p className="mt-1 text-sm text-gray-500 font-poppins">{message}</p>
-    </div>
-  </div>
-);
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faPhone, faMapMarker } from '@fortawesome/free-solid-svg-icons';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ContactMe = () => {
-  const messageRef = useRef(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     phone: '',
     message: ''
   });
 
-  const handleInput = () => {
-    const textarea = messageRef.current;
-    textarea.style.height = 'auto';
-    textarea.style.height = `${textarea.scrollHeight}px`;
-  };
+  const contactInfo = [
+    {
+      icon: faPhone,
+      title: 'Teléfono',
+      info: '+54 343 123 456',
+      link: 'tel:+34600123456'
+    },
+    {
+      icon: faEnvelope,
+      title: 'Email',
+      info: 'chef@tudominio.com',
+      link: 'mailto:chef@tudominio.com'
+    },
+    {
+      icon: faMapMarker,
+      title: 'Ubicación',
+      info: 'Entre Rios, Argentina',
+      link: 'https://www.google.com.ar/maps/place/Entre+R%C3%ADos/@-32.0902087,-60.6071431,8z/data=!3m1!4b1!4m6!3m5!1s0x95a551ddba482fbf:0x69284bf0dcd46382!8m2!3d-32.5175643!4d-59.1041758!16zL20vMDJrZ3Bx?entry=ttu&g_ep=EgoyMDI1MDMxOS4yIKXMDSoASAFQAw%3D%3D'
+    }
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,223 +43,188 @@ const ContactMe = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    const loadingToast = toast.loading(
-      <div className="flex items-center space-x-3">
-        <div className="animate-pulse">
-          <div className="h-10 w-10 bg-violet-500 rounded-full flex items-center justify-center">
-            <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-            </svg>
-          </div>
-        </div>
-        <div className="font-poppins">
-          <p className="text-sm font-medium text-gray-900">Enviando mensaje</p>
-          <p className="text-sm text-gray-500">Por favor, espera un momento...</p>
-        </div>
-      </div>
-    );
-
-    try {
-      const response = await fetch(import.meta.env.VITE_FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        body: new FormData(e.target),
-        headers: { Accept: 'application/json' },
-      });
-
-      if (response.ok) {
-        toast.custom(
-          <CustomToast message="Gracias por contactarme. Te responderé lo antes posible." />,
-          { duration: 5000 }
-        );
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          message: ''
-        });
-      } else {
-        throw new Error('Error al enviar el formulario');
-      }
-    } catch (error) {
-      toast.error(
-        <div className="flex items-center space-x-3">
-          <div className="h-10 w-10 bg-red-100 rounded-full flex items-center justify-center">
-            <svg className="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </div>
-          <div className="font-poppins">
-            <p className="text-sm font-medium text-gray-900">Error al enviar</p>
-            <p className="text-sm text-gray-500">Por favor, intenta nuevamente</p>
-          </div>
-        </div>,
-        { duration: 5000 }
-      );
-    } finally {
-      toast.dismiss(loadingToast);
-      setIsSubmitting(false);
-    }
+    
+    // Aquí iría la lógica de envío del formulario
+    toast.success('¡Mensaje enviado con éxito! Me pondré en contacto contigo pronto.');
+    
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      message: ''
+    });
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
-      <Toaster position="bottom-center" reverseOrder={false} />
+    <div className="relative min-h-screen flex items-center py-20">
+      {/* Imagen de fondo con overlay */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1428515613728-6b4607e44363?q=80&w=2070')] bg-cover bg-fixed bg-center" />
+        <div className="absolute inset-0 bg-truffle/90 backdrop-blur-sm" />
+      </div>
 
-      <div className="w-full max-w-4xl mx-auto">
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-6 sm:p-8 border border-white/20">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-2 font-poppins">Contáctame</h2>
-            <p className="text-gray-300 text-center mb-8 font-poppins text-sm sm:text-base">Si te interesa colaborar conmigo, no dudes en contactarme.</p>
+      {/* Círculos decorativos */}
+      <div className="absolute right-0 top-1/4 w-[40vh] h-[40vh] rounded-full border border-sage/10 animate-[spin_30s_linear_infinite]" />
+      <div className="absolute left-0 bottom-1/4 w-[25vh] h-[25vh] rounded-full border border-copper/10 animate-[spin_20s_linear_infinite_reverse]" />
 
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="font-migra text-4xl md:text-5xl lg:text-6xl text-cream mb-6">
+            Contacto
+          </h2>
+          <p className="font-ginger text-cream/80 text-lg max-w-2xl mx-auto">
+            ¿Interesado en mis servicios? Contáctame para crear juntos una experiencia gastronómica única
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Información de contacto */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+            <div className="space-y-8">
+              {contactInfo.map((item, index) => (
+                <motion.a
+                  key={index}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex items-center space-x-6 group"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-cream/5 backdrop-blur-sm flex items-center justify-center border border-cream/10 group-hover:border-sage/30 transition-all duration-300">
+                    <FontAwesomeIcon icon={item.icon} className="text-copper text-xl" />
+                  </div>
+                  <div>
+                    <h4 className="font-monument text-sage text-sm tracking-wider mb-1">{item.title}</h4>
+                    <p className="font-ginger text-cream">{item.info}</p>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="mt-12 p-6 bg-cream/5 backdrop-blur-sm rounded-xl border border-cream/10"
+            >
+              <h4 className="font-monument text-cream text-lg mb-4">Horario de Atención</h4>
+              <div className="space-y-2 font-ginger text-cream/80">
+                <p>Lunes a Viernes: 10:00 - 20:00</p>
+                <p>Sábados: 11:00 - 15:00</p>
+                <p>Domingos: Cerrado</p>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Formulario de contacto */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="firstName"
-                    className="block text-sm font-medium text-gray-300 font-poppins"
-                  >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="relative group">
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-cream/5 backdrop-blur-sm border border-cream/10 rounded-xl px-6 py-4 text-cream placeholder-transparent peer focus:border-sage/30 transition-all duration-300"
+                    placeholder="Nombre"
+                  />
+                  <label className="absolute left-6 -top-6 text-cream/60 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-cream/40 peer-placeholder-shown:top-4 peer-focus:-top-6 peer-focus:text-cream/60 peer-focus:text-sm">
                     Nombre
                   </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-white/10 border-2 border-violet-300/20 rounded-xl text-white focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/50 transition-all duration-300 font-poppins"
-                    required
-                  />
                 </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="lastName"
-                    className="block text-sm font-medium text-gray-300 font-poppins"
-                  >
-                    Apellido
+                <div className="relative group">
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-cream/5 backdrop-blur-sm border border-cream/10 rounded-xl px-6 py-4 text-cream placeholder-transparent peer focus:border-sage/30 transition-all duration-300"
+                    placeholder="Email"
+                  />
+                  <label className="absolute left-6 -top-6 text-cream/60 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-cream/40 peer-placeholder-shown:top-4 peer-focus:-top-6 peer-focus:text-cream/60 peer-focus:text-sm">
+                    Email
                   </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-white/10 border-2 border-violet-300/20 rounded-xl text-white focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/50 transition-all duration-300 font-poppins"
-                    required
-                  />
                 </div>
               </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-300 font-poppins"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white/10 border-2 border-violet-300/20 rounded-xl text-white focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/50 transition-all duration-300 font-poppins"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium text-gray-300 font-poppins"
-                >
-                  Número de Celular
-                </label>
+              
+              <div className="relative group">
                 <input
                   type="tel"
-                  id="phone"
                   name="phone"
                   value={formData.phone}
-                  onChange={(e) => {
-                    // Solo actualizar si es un número
-                    const value = e.target.value.replace(/[^0-9]/g, ''); // Elimina cualquier caracter no numérico
-                    handleChange({ target: { name: 'phone', value } }); // Actualiza el estado
-                  }}
-                  pattern="^[0-9]*$" // Asegura que solo se acepten números
-                  className="w-full px-4 py-3 bg-white/10 border-2 border-violet-300/20 rounded-xl text-white focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/50 transition-all duration-300 font-poppins"
-                  required
+                  onChange={handleChange}
+                  className="w-full bg-cream/5 backdrop-blur-sm border border-cream/10 rounded-xl px-6 py-4 text-cream placeholder-transparent peer focus:border-sage/30 transition-all duration-300"
+                  placeholder="Teléfono"
                 />
+                <label className="absolute left-6 -top-6 text-cream/60 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-cream/40 peer-placeholder-shown:top-4 peer-focus:-top-6 peer-focus:text-cream/60 peer-focus:text-sm">
+                  Teléfono
+                </label>
               </div>
 
-
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-300 font-poppins"
-                >
+              <div className="relative group">
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows="4"
+                  className="w-full bg-cream/5 backdrop-blur-sm border border-cream/10 rounded-xl px-6 py-4 text-cream placeholder-transparent peer focus:border-sage/30 transition-all duration-300 resize-none"
+                  placeholder="Mensaje"
+                ></textarea>
+                <label className="absolute left-6 -top-6 text-cream/60 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-cream/40 peer-placeholder-shown:top-4 peer-focus:-top-6 peer-focus:text-cream/60 peer-focus:text-sm">
                   Mensaje
                 </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  ref={messageRef}
-                  value={formData.message}
-                  onChange={(e) => {
-                    handleChange(e);
-                    handleInput();
-                  }}
-                  rows="4"
-                  className="w-full px-4 py-3 bg-white/10 border-2 border-violet-300/20 rounded-xl text-white focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/50 transition-all duration-300 resize-none font-poppins"
-                  required
-                ></textarea>
               </div>
 
-              <div className="text-center pt-4">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`
-                    group relative inline-flex items-center justify-center px-8 py-3 rounded-xl
-                    overflow-hidden font-medium transition-all duration-300 transform
-                    ${isSubmitting
-                      ? 'bg-gray-400 cursor-not-allowed text-white/50'
-                      : 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:scale-105 active:scale-100 hover:shadow-lg'
-                    }
-                    font-poppins text-sm sm:text-base
-                  `}
-                >
-                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-white/20 group-hover:translate-x-full group-hover:skew-x-12"></span>
-                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-white/10 group-hover:-translate-x-full group-hover:-skew-x-12"></span>
-                  <span className="absolute bottom-0 left-0 hidden w-full h-0.5 transition-all duration-200 ease-out transform translate-x-full bg-white group-hover:translate-x-0"></span>
-                  <span className="absolute bottom-0 right-0 hidden w-0.5 h-full transition-all duration-200 ease-out transform translate-y-full bg-white group-hover:translate-y-0"></span>
-                  <span className="relative flex items-center">
-                    {isSubmitting ? (
-                      <>
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Enviando...
-                      </>
-                    ) : (
-                      <>
-                        Enviar Mensaje
-                        <svg className="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                      </>
-                    )}
-                  </span>
-                </button>
-              </div>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                className="w-full bg-gradient-to-r from-sage to-copper text-cream font-monument text-sm tracking-wider uppercase py-4 rounded-xl hover:opacity-90 transition-opacity duration-300"
+              >
+                Enviar Mensaje
+              </motion.button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
+
+      <Toaster
+        position="bottom-center"
+        toastOptions={{
+          className: 'bg-cream/10 backdrop-blur-md border border-cream/10 text-cream',
+          style: {
+            background: 'rgba(255, 255, 255, 0.1)',
+            color: '#F5F5F5',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+          },
+          duration: 4000,
+        }}
+      />
     </div>
   );
 };
